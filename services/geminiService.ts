@@ -29,6 +29,9 @@ let _aiInstance: GoogleGenAI | null = null;
 const getAI = () => {
   if (!_aiInstance) {
     const apiKey = getApiKey();
+    if (!apiKey) {
+      throw new Error("API Key is not set. Please add API_KEY to window._env_ in index.html or set VITE_API_KEY in .env");
+    }
     _aiInstance = new GoogleGenAI({ apiKey });
   }
   return _aiInstance as GoogleGenAI;
