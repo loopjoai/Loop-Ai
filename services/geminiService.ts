@@ -32,14 +32,15 @@ export const generateBusinessNames = async (niche: string): Promise<string[]> =>
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate business names"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate business names (${response.status})`);
     }
 
     const data = await response.json();
     return data.names || [];
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateBusinessNames error:", error);
+    throw new Error(error.message || "Failed to generate business names");
   }
 };
 
@@ -52,14 +53,15 @@ export const generateImagePrompts = async (niche: string): Promise<string[]> => 
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate image prompts"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate image prompts (${response.status})`);
     }
 
     const data = await response.json();
     return data.prompts || [];
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateImagePrompts error:", error);
+    throw new Error(error.message || "Failed to generate image prompts");
   }
 };
 
@@ -72,14 +74,15 @@ export const generateLogo = async (businessName: string, niche: string): Promise
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate logo"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate logo (${response.status})`);
     }
 
     const data = await response.json();
     return data.description || "";
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateLogo error:", error);
+    throw new Error(error.message || "Failed to generate logo");
   }
 };
 
@@ -92,14 +95,15 @@ export const generateProductImage = async (description: string, niche: string): 
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate product image"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate product image (${response.status})`);
     }
 
     const data = await response.json();
     return data.description || "";
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateProductImage error:", error);
+    throw new Error(error.message || "Failed to generate product image");
   }
 };
 
@@ -114,13 +118,14 @@ export const generateTargetingSuggestions = async (
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate targeting suggestions"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate targeting suggestions (${response.status})`);
     }
 
     return await response.json();
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateTargetingSuggestions error:", error);
+    throw new Error(error.message || "Failed to generate targeting suggestions");
   }
 };
 
@@ -135,14 +140,15 @@ export const generateAdConcepts = async (
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate ad concepts"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate ad concepts (${response.status})`);
     }
 
     const data = await response.json();
     return Array.isArray(data) ? data.map((c: any, i: number) => ({ ...c, id: `concept-${i}` })) : [];
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateAdConcepts error:", error);
+    throw new Error(error.message || "Failed to generate ad concepts");
   }
 };
 
@@ -175,13 +181,14 @@ export const generateAdVisual = async (
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      handleApiError(new Error(error.error || "Failed to generate ad visual"));
+      const errorData = await response.json().catch(() => ({ error: `HTTP ${response.status}` }));
+      throw new Error(errorData.error || `Failed to generate ad visual (${response.status})`);
     }
 
     const data = await response.json();
     return data.description || "";
-  } catch (error) {
-    handleApiError(error);
+  } catch (error: any) {
+    console.error("generateAdVisual error:", error);
+    throw new Error(error.message || "Failed to generate ad visual");
   }
 };
