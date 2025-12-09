@@ -9,6 +9,7 @@ import {
   setAccessToken,
   getAccessToken
 } from './services/mockMetaService';
+import { logEnvironmentStatus } from './services/apiConfig';
 import { PortfolioSelector } from './components/PortfolioSelector';
 import { AssetSelector } from './components/AssetSelector';
 import { generateAdConcepts, generateAdVisual, generateLogo, generateProductImage, generateBusinessNames, generateImagePrompts, generateTargetingSuggestions } from './services/geminiService';
@@ -88,6 +89,11 @@ export default function App() {
   // Refs for file inputs
   const productInputRef = useRef<HTMLInputElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
+
+  // Initialize environment on app load
+  useEffect(() => {
+    logEnvironmentStatus();
+  }, []);
 
   // Sync business name to logo text initially
   useEffect(() => {

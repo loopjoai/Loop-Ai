@@ -17,12 +17,14 @@
           scrollbar-width: none;
       }
     </style>
-    <!-- Runtime Configuration -->
+    <!-- Runtime Configuration from Environment Variables -->
     <script>
       window._env_ = {
-        // PRODUCTION CONFIGURATION
-        FACEBOOK_APP_ID: "864836979836977"
+        // Loaded from .env.local and set by Vite in vite.config.ts
+        FACEBOOK_APP_ID: import.meta.env.VITE_FACEBOOK_APP_ID || "864836979836977",
+        GOOGLE_CLIENT_ID: import.meta.env.VITE_GOOGLE_CLIENT_ID || ""
       };
+      console.log('Environment loaded:', window._env_);
     </script>
     <script type="importmap">
 {
