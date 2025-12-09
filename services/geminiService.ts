@@ -1,11 +1,11 @@
 import { BrandProfile, AdConcept, LogoPosition, CampaignSettings } from "../types";
 
 // Helper to determine API endpoint
-// In development (Vite on 3000), API server runs on 3001
+// In development (Vite on 5173), API server runs on 3001
 // In production (Vercel), API routes are at /api
 const getApiEndpoint = (): string => {
   if (typeof window !== 'undefined') {
-    const isDev = window.location.hostname === 'localhost' && window.location.port === '3000';
+    const isDev = window.location.hostname === 'localhost' && window.location.port === '5173';
     return isDev ? 'http://localhost:3001/api/gemini' : '/api/gemini';
   }
   return '/api/gemini'; // Fallback for SSR
